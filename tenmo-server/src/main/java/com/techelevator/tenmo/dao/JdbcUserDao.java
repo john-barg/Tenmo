@@ -18,7 +18,7 @@ public class JdbcUserDao implements UserDao {
     private static final BigDecimal STARTING_BALANCE = new BigDecimal("1000.00");
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcUserDao(JdbcTemplate jdbcTemplate) {
+    public JdbcUserDao(JdbcTemplate jdbcTemplate)  { //Change to (DataSource dataSource) From (JdbcTemplate jdbcTemplate)
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -53,6 +53,11 @@ public class JdbcUserDao implements UserDao {
             return mapRowToUser(rowSet);
         }
         throw new UsernameNotFoundException("User " + username + " was not found.");
+    }
+
+    @Override                                                           // Created new override method - uncertain of necessity
+    public User get(long id){
+        return null;
     }
 
     @Override
