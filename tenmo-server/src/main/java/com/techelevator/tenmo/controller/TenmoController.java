@@ -22,15 +22,16 @@ public class TenmoController {
 //    public User getBalance(@PathVariable long id) throws UsernameNotFoundException{
 //        return dao.get(id);
 //    }
-    @RequestMapping(path ="/accounts")
+    @RequestMapping(path ="/tenmo")
     public String tenmoService() {
         return "Hello, I am Tenmo";
     }
 
-    //@RequestMapping(path = "/accounts")
-    //public User findingAccount( String username) {
-     //   return userDao.findByUsername(String username);
-  //  }
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/accounts")
+    public User findingAccount( String username) {
+        return userDao.findByUsername(username);
+    }
 
 
 //RETURN ACCOUNT BALANCE
