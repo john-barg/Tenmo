@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.security.auth.login.AccountException;
+import java.security.Principal;
+import java.util.List;
 
+@PreAuthorize("isAuthenticated()")
 @RestController
 public class TenmoController {
 
@@ -27,10 +31,18 @@ public class TenmoController {
         return "Hello, I am Tenmo";
     }
 
-    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/users")
+    public List<User> listAllUsers(){
+        return userDao.findAll();
+    }
+
+
     @RequestMapping(path = "/accounts")
-    public User findingAccount( String username) {
-        return userDao.findByUsername(username);
+    public Account findingAccount(Principal principal) {            // create account object
+
+        int id = userDao.findIdByUsername(principal.getName());
+        //take id and pass it to new DAO that retrieves account information for user, creating/accessing the returning account
+
     }
 
 
