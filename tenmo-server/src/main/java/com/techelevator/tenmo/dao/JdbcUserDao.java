@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,8 @@ public class JdbcUserDao implements UserDao {
     private static final BigDecimal STARTING_BALANCE = new BigDecimal("1000.00");
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcUserDao(JdbcTemplate jdbcTemplate)  { //Change to (DataSource dataSource) From (JdbcTemplate jdbcTemplate)
-        this.jdbcTemplate = jdbcTemplate;
+    public JdbcUserDao(DataSource dataSource)  { //Change to (DataSource dataSource) From (JdbcTemplate jdbcTemplate)
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
@@ -55,10 +56,10 @@ public class JdbcUserDao implements UserDao {
         throw new UsernameNotFoundException("User " + username + " was not found.");
     }
 
-    @Override                                                           // Created new override method - uncertain of necessity
-    public User get(long id){
-        return null;
-    }
+//    @Override                                                           // Created new override method - uncertain of necessity
+//    public User get(long id){
+//        return null;
+//    }
 
     @Override
     public boolean create(String username, String password) {

@@ -1,0 +1,77 @@
+// Mini Capstone 2 API Diagram
+
+Work in steps, TDD, 
+
+Use case 1
+	Register a new user with 1,000 TE Bucks
+	- Complete
+
+Use Case 2
+	Login returns Authtoken
+	AuthToken must be inlcuded later where authorization is needed
+	- Complete
+
+Use Case 3 -Retrieve balance
+	SQL Query
+	Authenticated user of the system needs to see account balance
+	AuthToken 
+	@PreAuthorization
+
+USERS
+url: http://localhost:8080/users
+Method: GET
+Description: this method retrieves all users
+Http Status Codes:200 - OK
+
+Return account Balance
+url : /accounts/{id}
+Method : GET
+DESCRPITION: this method returns account balance
+Status Code: 200-OK
+
+TRANSFER FUNDS - "don't have separate withdarawal and deposit methods"
+url : /accounts/{id1}
+method : POST
+desc. : update new account balance (less transfer amount)
+status code: 200 -ok, insufficient funds?
+
+url : /accounts/{id2}
+method : POST
+desc. : update new account balance (added transfer amount) 
+status code: 200-ok
+
+VIEW TRANSFER
+url: /transfers(/{id})
+method : GET
+desc : recalls transfer amounts
+status code: OK 
+
+TRANSFER DETAILS
+url: /transfer/({id})
+method : GET 
+desc : returns transfer details
+status : OK
+
+REQUESTING PAYMENT
+url: transfer/id
+method : PUT
+desc : creates new transfer
+status : OK
+
+PENDING REQUESTS 
+url : transfer_status/
+method : GET 
+desc :	returns status of transfer
+status : OK
+
+APPROVE TRANSFER
+url : /transfer/{id}
+method : GET
+desc : tells if transfer is approved
+status: OK
+
+REJECT TRANSFER
+url : /transfer/{id}
+method :GET
+desc : tells you if transfer is rejected 
+status : 404 not found	
