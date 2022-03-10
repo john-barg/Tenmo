@@ -15,18 +15,38 @@ import org.springframework.web.bind.annotation.RestController;
 public class TenmoController {
 
     @Autowired
-    private UserDao dao;
+    private UserDao userDao;
 
 //    @PreAuthorize("permitAll")
 //    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
 //    public User getBalance(@PathVariable long id) throws UsernameNotFoundException{
 //        return dao.get(id);
 //    }
-    @RequestMapping(path ="/tenmo")
+    @RequestMapping(path ="/accounts")
     public String tenmoService() {
         return "Hello, I am Tenmo";
     }
 
+    //@RequestMapping(path = "/accounts")
+    //public User findingAccount( String username) {
+     //   return userDao.findByUsername(String username);
+  //  }
 
+
+//RETURN ACCOUNT BALANCE
+//url : /accounts
+//Method : GET.principal
+//DESCRPITION: this method returns account balance
+//Status Code: 200-OK
+//TRANSFER FUNDS
+//url : /transfer
+//method : POST
+//desc. : Establishes transfer amount, apply the transfer to the relative amounts
+//status code: 200 -ok, insufficient funds?
+//VIEW TRANSFER
+//url: /transfers/{id}
+//method : GET
+//desc : recalls transfer amounts, retrieve further details
+//status code: OK
 
 }
