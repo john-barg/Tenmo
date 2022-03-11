@@ -28,7 +28,7 @@ public class JdbcAccountDAO implements AccountDAO{
         BigDecimal balance = new BigDecimal();
 
         String sql = "SELECT balance FROM account WHERE account ILIKE ?;";
-        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,);
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, "2001, 2002");
         if (rowSet.next()){
             return mapRowToAccount(rowSet);
         }
