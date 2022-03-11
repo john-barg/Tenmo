@@ -1,6 +1,8 @@
 package com.techelevator.tenmo.controller;
 
+import com.techelevator.tenmo.dao.AccountDAO;
 import com.techelevator.tenmo.dao.UserDao;
+import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,12 +22,10 @@ public class TenmoController {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private AccountDAO accountDAO;
 
-//    @PreAuthorize("permitAll")
-//    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-//    public User getBalance(@PathVariable long id) throws UsernameNotFoundException{
-//        return dao.get(id);
-//    }
+
     @RequestMapping(path ="/tenmo")
     public String tenmoService() {
         return "Hello, I am Tenmo";
@@ -42,7 +42,7 @@ public class TenmoController {
 
         int id = userDao.findIdByUsername(principal.getName());
         //take id and pass it to new DAO that retrieves account information for user, creating/accessing the returning account
-
+     return null;
     }
 
 

@@ -4,5 +4,5 @@ import java.math.BigDecimal;
 
 public interface AccountDAO {
 
-    BigDecimal returnBalance();
+    BigDecimal returnBalance(String username);
 }

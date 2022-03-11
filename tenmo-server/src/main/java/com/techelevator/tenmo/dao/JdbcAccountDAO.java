@@ -22,26 +22,23 @@ public class JdbcAccountDAO implements AccountDAO{
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @Override
-    public BigDecimal returnBalance() {
+    @Override                           //super uncertain about recalling by username
+    public BigDecimal returnBalance(String username) {
 
-        BigDecimal balance = new BigDecimal();
-
-        String sql = "SELECT balance FROM account WHERE account ILIKE ?;";
-        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,);
-        if (rowSet.next()){
-            return mapRowToAccount(rowSet);
-        }
-        throw new AccountNotFoundException("Account " + account + " was not found.");
+        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        BigDecimal balance = jdbcTemplate.queryForObject(sql, BigDecimal.class, username );
+//        if (rowSet.next()){
+//            return mapRowToAccount(rowSet);
+//        }
+//        throw new AccountNotFoundException("Account " +  + " was not found.");
         return balance;
     }
-
-
 
 
     private Account mapRowToAccount(SqlRowSet rs) {
         Account account = new Account();
         account.setId(rs.getLong("account_id"));
+        account.setId(rs.getLong("user_id"));
         account.setBalance(rs.getBigDecimal("balance"));
         account.setActivated(true);
         return account;
