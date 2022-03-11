@@ -66,18 +66,18 @@ public class ConsoleService {
 
     public void sendBucks(){
         System.out.println();
-        String recipient = promptForString("Recipient: ");
-        BigDecimal amount= promptForBigDecimal("amount: ");
+        String recipient = promptForString("Id Of Recipient: ");
+        BigDecimal amount= promptForBigDecimal("amount sending: ");
         System.out.println();
-        return TransferInfo( recipient, amount);
+        return SendInfo( recipient, amount);
     }
 
     public void requestBucks(){
         System.out.println();
-        String recipient = promptForString("Recipient: ");
-        BigDecimal amount= promptForBigDecimal("amount: ");
+        String recipient = promptForString("Who are you requesting:");
+        BigDecimal amount= promptForBigDecimal("amount requesting: ");
         System.out.println();
-        return TransferInfo( recipient, amount);
+        return RequestInfo( recipient, amount);
     }
 //-----------------
     public UserCredentials promptForCredentials() {
