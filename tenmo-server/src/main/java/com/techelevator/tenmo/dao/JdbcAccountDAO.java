@@ -22,19 +22,8 @@ public class JdbcAccountDAO implements AccountDAO{
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-<<<<<<< HEAD
-    @Override
-    public BigDecimal returnBalance() {
+//<<<<<<< HEAD
 
-        BigDecimal balance = new BigDecimal();
-
-        String sql = "SELECT balance FROM account WHERE account ILIKE ?;";
-        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, "2001, 2002");
-        if (rowSet.next()){
-            return mapRowToAccount(rowSet);
-        }
-        throw new AccountNotFoundException("Account " + account + " was not found.");
-=======
     @Override                           //super uncertain about recalling by username
     public BigDecimal returnBalance(String username) {
 
@@ -44,7 +33,7 @@ public class JdbcAccountDAO implements AccountDAO{
 //            return mapRowToAccount(rowSet);
 //        }
 //        throw new AccountNotFoundException("Account " +  + " was not found.");
->>>>>>> ae3a29ee0befdbd6e0f4c9bea86708d8df7a1b3e
+
         return balance;
     }
 
