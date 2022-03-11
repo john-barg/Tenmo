@@ -22,6 +22,8 @@ public class JdbcAccountDAO implements AccountDAO{
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+//<<<<<<< HEAD
+
     @Override                           //super uncertain about recalling by username
     public BigDecimal returnBalance(String username) {
 
@@ -31,6 +33,7 @@ public class JdbcAccountDAO implements AccountDAO{
 //            return mapRowToAccount(rowSet);
 //        }
 //        throw new AccountNotFoundException("Account " +  + " was not found.");
+
         return balance;
     }
 

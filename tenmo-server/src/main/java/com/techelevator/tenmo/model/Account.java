@@ -11,7 +11,7 @@ public class Account {
     private BigDecimal balance;
     private boolean activated;
 
-    public Account() { }
+    public Account() { } //not sure of use come back later!!
 
     public Account(Long id, BigDecimal balance){
         this.accountId = accountId;
