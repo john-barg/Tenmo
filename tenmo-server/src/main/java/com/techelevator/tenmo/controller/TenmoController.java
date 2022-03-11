@@ -40,7 +40,7 @@ public class TenmoController {
     @RequestMapping(path = "/accounts")
     public Account findingAccount(Principal principal) {            // create account object
 
-        int id = userDao.findIdByUsername(principal.getName());
+        int userId = userDao.findIdByUsername(principal.getName());
         //take id and pass it to new DAO that retrieves account information for user, creating/accessing the returning account
      return null;
     }

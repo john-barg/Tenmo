@@ -22,10 +22,9 @@ public class JdbcAccountDAO implements AccountDAO{
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-//<<<<<<< HEAD
-
-    @Override                           //super uncertain about recalling by username
+    @Override                           //super uncertain about recalling by username ///principal.getId
     public BigDecimal returnBalance(String username) {
+        //int id = jdbcuserdao.findidbyusername(principal)
 
         String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
         BigDecimal balance = jdbcTemplate.queryForObject(sql, BigDecimal.class, username );

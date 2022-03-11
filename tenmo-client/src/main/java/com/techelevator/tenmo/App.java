@@ -83,29 +83,28 @@ public class App {
             consoleService.pause();
         }
     }
-
+//-----------------------------------------------
 	private void viewCurrentBalance() {
-		// TODO Auto-generated method stub
-		
+        consoleService.printAccountBalance();
 	}
 
 	private void viewTransferHistory() {
-		// TODO Auto-generated method stub
+		consoleService.viewTransferHistory();
 		
 	}
 
 	private void viewPendingRequests() {
-		// TODO Auto-generated method stub
+		consoleService.viewPendingRequests();
 		
 	}
 
 	private void sendBucks() {
-		// TODO Auto-generated method stub
+		consoleService.sendBucks();
 		
 	}
 
 	private void requestBucks() {
-		// TODO Auto-generated method stub
+		consoleService.requestBucks();
 		
 	}
 

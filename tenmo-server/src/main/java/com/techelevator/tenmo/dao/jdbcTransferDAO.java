@@ -16,7 +16,7 @@ public class jdbcTransferDAO implements transferdao {
     }
 
 
-    @Override                           //super uncertain about recalling by username
+    @Override
     public BigDecimal balanceOfTransfer(String username) {
 
         String sql = "SELECT balance FROM transfer WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";

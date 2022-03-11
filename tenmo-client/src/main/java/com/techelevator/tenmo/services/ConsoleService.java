@@ -45,7 +45,41 @@ public class ConsoleService {
         System.out.println("0: Exit");
         System.out.println();
     }
+//-----------------
+    public void printAccountBalance() {
+        System.out.println();
+        System.out.println("Your current balance is: ");  // somevariable from server );
+        System.out.println();
+    }
 
+    public void viewTransferHistory() {
+        System.out.println();
+        System.out.println("Your Transfer history is: "); // somevariable from server );
+        System.out.println();
+    }
+
+    public void viewPendingRequests(){
+        System.out.println();
+        System.out.println("your pending request are as is"); //somevariable recieved
+        System.out.println();
+    }
+
+    public void sendBucks(){
+        System.out.println();
+        String recipient = promptForString("Recipient: ");
+        BigDecimal amount= promptForBigDecimal("amount: ");
+        System.out.println();
+        return TransferInfo( recipient, amount);
+    }
+
+    public void requestBucks(){
+        System.out.println();
+        String recipient = promptForString("Recipient: ");
+        BigDecimal amount= promptForBigDecimal("amount: ");
+        System.out.println();
+        return TransferInfo( recipient, amount);
+    }
+//-----------------
     public UserCredentials promptForCredentials() {
         String username = promptForString("Username: ");
         String password = promptForString("Password: ");
