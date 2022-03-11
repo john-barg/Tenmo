@@ -6,25 +6,35 @@ import java.util.Set;
 
 public class Account {
 
-    private Long id;
+    private Long accountId;
+    private int userId;
     private BigDecimal balance;
     private boolean activated;
 
     public Account() { }
 
     public Account(Long id, BigDecimal balance){
-        this.id = id;
+        this.accountId = accountId;
+        this.userId=userId;
         this.balance= balance;
         this.activated=true;
 
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public Long getId() {
-        return id;
+        return accountId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.accountId = accountId;
     }
 
     public BigDecimal getBalance() {
@@ -46,7 +56,8 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
+                "user id=" + userId +
+                ", account id="+ accountId +
                 ", balance='" + balance + '\'' +
                 ", activated=" + activated +
                 '}';
