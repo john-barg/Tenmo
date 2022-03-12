@@ -39,5 +39,20 @@ public class jdbcTransferDAO implements transferdao {
 
     }
 
-
+// @Override
+//    public  Account returnAccount(String username) throws AccountNotFoundException {
+//
+//        Account account = null;
+//
+//        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+//        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+//
+//        if (result.next()) {
+//            account = mapRowToAccount(result);
+//        }
+//        if(account == null) {
+//            throw new AccountNotFoundException();
+//        }
+//        return account;
+//    }
 }

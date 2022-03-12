@@ -37,7 +37,7 @@ public class TenmoController {
 
     @RequestMapping(path = "/accounts", method = RequestMethod.GET)
     @ResponseStatus
-    public Account findingAccount(@Valid Principal principal) {
+    public Account findingAccount(@Valid @RequestBody Principal principal) {
         return AccountDAO.account; // test in postman
     }
 
