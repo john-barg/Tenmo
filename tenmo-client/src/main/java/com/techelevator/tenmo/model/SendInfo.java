@@ -4,10 +4,13 @@ import java.math.BigDecimal;
 
 public class SendInfo {
 
-//String recipient = promptForString("Id Of Recipient: ");
-//        BigDecimal amount= promptForBigDecimal("amount sending: ");
     private String recipient;
     private BigDecimal amount;
+
+    public SendInfo(String recipient, BigDecimal amount) {
+        this.recipient=recipient;
+        this.amount=amount;
+    }
 
     public String getRecipient() {
         return recipient;
@@ -25,6 +28,5 @@ public class SendInfo {
         this.amount = amount;
     }
 
-// send info
-    //request info
+
 }

@@ -14,5 +14,4 @@ public interface UserDao {
 
     boolean create(String username, String password);
 
-//    User get(long id);                      //Created new user method - uncertain
 }

@@ -7,12 +7,10 @@ import com.techelevator.tenmo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.AccountException;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -26,10 +24,10 @@ public class TenmoController {
     private AccountDAO accountDAO;
 
 
-    @RequestMapping(path ="/tenmo")
-    public String tenmoService() {
-        return "Hello, I am Tenmo";
-    }
+//    @RequestMapping(path ="/tenmo")
+//    public String tenmoService() {
+//        return "Hello, I am Tenmo";
+//    }
 
     @RequestMapping(path = "/users")
     public List<User> listAllUsers(){
@@ -37,24 +35,22 @@ public class TenmoController {
     }
 
 
-    @RequestMapping(path = "/accounts")
-    public Account findingAccount(Principal principal) {            // create account object
-
-        int userId = userDao.findIdByUsername(principal.getName());
-        //take id and pass it to new DAO that retrieves account information for user, creating/accessing the returning account
-     return null;
+    @RequestMapping(path = "/accounts", method = RequestMethod.GET)
+    @ResponseStatus
+    public Account findingAccount(@Valid Principal principal) {
+        return AccountDAO.account; // test in postman
     }
 
 
 //RETURN ACCOUNT BALANCE
 //url : /accounts
 //Method : GET.principal
-//DESCRPITION: this method returns account balance
+//DESCRIPTION: this method returns account balance
 //Status Code: 200-OK
 //TRANSFER FUNDS
 //url : /transfer
 //method : POST
-//desc. : Establishes transfer amount, apply the transfer to the relative amounts
+//desc. : Establishes transfer amount, apply the transfer to the relative amount's
 //status code: 200 -ok, insufficient funds?
 //VIEW TRANSFER
 //url: /transfers/{id}
@@ -62,4 +58,7 @@ public class TenmoController {
 //desc : recalls transfer amounts, retrieve further details
 //status code: OK
 
-}
+}// create account object
+
+//        int userId = userDao.findIdByUsername(principal.getName());
+//take id and pass it to new DAO that retrieves account information for user, creating/accessing the returning account

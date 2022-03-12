@@ -1,6 +1,8 @@
 package com.techelevator.tenmo.services;
 
 
+import com.techelevator.tenmo.model.RequestInfo;
+import com.techelevator.tenmo.model.SendInfo;
 import com.techelevator.tenmo.model.UserCredentials;
 
 import java.math.BigDecimal;
@@ -48,7 +50,7 @@ public class ConsoleService {
 //-----------------
     public void printAccountBalance() {
         System.out.println();
-        System.out.println("Your current balance is: ");  // somevariable from server );
+        System.out.println("Your current balance is: " );  // somevariable from server );
         System.out.println();
     }
 
@@ -64,20 +66,20 @@ public class ConsoleService {
         System.out.println();
     }
 
-    public void sendBucks(){
+    public SendInfo sendBucks(){
         System.out.println();
-        String recipient = promptForString("Id Of Recipient: ");
-        BigDecimal amount= promptForBigDecimal("amount sending: ");
+        String recipientOfPayment = promptForString("Who would you like to send money to? ");
+        BigDecimal amount= promptForBigDecimal("How much? ");
         System.out.println();
-        return SendInfo( recipient, amount);
+        return new SendInfo(recipientOfPayment, amount);
     }
 
-    public void requestBucks(){
+    public RequestInfo requestBucks(){
         System.out.println();
-        String recipient = promptForString("Who are you requesting:");
-        BigDecimal amount= promptForBigDecimal("amount requesting: ");
+        String recipientOfRequest = promptForString("Who are you requesting payment from? ");
+        BigDecimal amount= promptForBigDecimal("How much? ");
         System.out.println();
-        return RequestInfo( recipient, amount);
+        return new RequestInfo(recipientOfRequest, amount);
     }
 //-----------------
     public UserCredentials promptForCredentials() {
