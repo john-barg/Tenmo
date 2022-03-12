@@ -4,10 +4,11 @@ import com.techelevator.tenmo.model.Transfer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
+import javax.security.auth.login.AccountNotFoundException;
 import javax.sql.DataSource;
 import java.math.BigDecimal;
 
-public class jdbcTransferDAO implements transferdao {
+public class jdbcTransferDAO implements TransferDao {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -17,14 +18,19 @@ public class jdbcTransferDAO implements transferdao {
 
 
     @Override
-    public BigDecimal balanceOfTransfer(String username) {
+    public Transfer returnTransfer(String username) throws AccountNotFoundException {
+
+        Transfer transfer = null;
 
         String sql = "SELECT balance FROM transfer WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
-        BigDecimal transfer = jdbcTemplate.queryForObject(sql, BigDecimal.class, username );
-//        if (rowSet.next()){
-//            return mapRowToAccount(rowSet);
-//        }
-//        throw new AccountNotFoundException("Account " +  + " was not found.");
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+
+        if (result.next()) {
+            transfer = mapRowToTransfer(result);
+        }
+        if(transfer == null) {
+            throw new AccountNotFoundException();
+        }
 
         return transfer;
 

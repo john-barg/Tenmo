@@ -11,7 +11,7 @@ public class Account {
     private BigDecimal balance;
     private boolean activated;
 
-    public Account() { } //not sure of use come back later!!
+    public Account() { } //not sure of use, come back later!!
 
     public Account(Long id, BigDecimal balance){
         this.accountId = accountId;
@@ -21,20 +21,20 @@ public class Account {
 
     }
 
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
     public int getUserId() {
         return userId;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public Long getId() {
-        return accountId;
-    }
-
-    public void setId(Long id) {
-        this.accountId = accountId;
     }
 
     public BigDecimal getBalance() {

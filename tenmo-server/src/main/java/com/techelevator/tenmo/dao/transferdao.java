@@ -1,11 +1,18 @@
 package com.techelevator.tenmo.dao;
 
+import com.techelevator.tenmo.model.Transfer;
+
+import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
 
-public interface transferdao {
+public interface TransferDao {
 
-    public BigDecimal balanceOfTransfer(String username);
-    //retrieve transfer details
-    //update accounts according to transfer
-//    private();
+    Transfer transfer = new Transfer();
+
+    public Transfer returnTransfer(String username) throws AccountNotFoundException;
+
+    //get all transfers
+    //create transfers
+    //transfer status
+
 }

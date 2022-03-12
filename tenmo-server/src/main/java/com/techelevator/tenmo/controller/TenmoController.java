@@ -1,8 +1,10 @@
 package com.techelevator.tenmo.controller;
 
 import com.techelevator.tenmo.dao.AccountDAO;
+import com.techelevator.tenmo.dao.TransferDao;
 import com.techelevator.tenmo.dao.UserDao;
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,24 +25,20 @@ public class TenmoController {
     @Autowired
     private AccountDAO accountDAO;
 
-
-//    @RequestMapping(path ="/tenmo")
-//    public String tenmoService() {
-//        return "Hello, I am Tenmo";
-//    }
-
     @RequestMapping(path = "/users")
     public List<User> listAllUsers(){
         return userDao.findAll();
     }
 
-
     @RequestMapping(path = "/accounts", method = RequestMethod.GET)
-    @ResponseStatus
-    public Account findingAccount(@Valid @RequestBody Principal principal) {
-        return AccountDAO.account; // test in postman
+    public Account findingAccount( Principal principal) {
+        return AccountDAO.account;
     }
 
+    @RequestMapping(path = "/transfers")
+    public Transfer findingTransfer(Principal principal) {
+        return TransferDao.transfer;
+    }
 
 //RETURN ACCOUNT BALANCE
 //url : /accounts

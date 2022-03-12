@@ -22,20 +22,56 @@ public class JdbcAccountDAO implements AccountDAO{
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @Override
-    public  Account returnAccount(String username) throws AccountNotFoundException {
-
+    @Override  //Revise SQL statement?
+    public  Account getAccountId(String username) throws AccountNotFoundException {
         Account account = null;
-
         String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
-
         if (result.next()) {
             account = mapRowToAccount(result);
         }
         if(account == null) {
             throw new AccountNotFoundException();
         }
+        return account;
+    }
+
+    @Override  //Revise SQL statement?
+    public Account getUserId(String username) {
+        Account account = null;
+        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+        if (result.next()) {
+            account = mapRowToAccount(result);
+        }
+        if (account == null) {
+//            throw new AccountNotFoundException();
+        }
+        return account;
+    }
+
+    @Override  //Revise SQL statement?
+    public Account getBalance(String username) {
+        Account account = null;
+        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+        if (result.next()) {
+            account = mapRowToAccount(result);
+        }
+        if (account == null) {
+//            throw new AccountNotFoundException();
+        }
+        return account;
+    }
+
+
+
+    private Account mapRowToAccount(SqlRowSet rs) {
+        Account account = new Account();
+        account.setId(rs.getLong("account_id"));
+        account.setId(rs.getLong("user_id"));
+        account.setBalance(rs.getBigDecimal("balance"));
+        account.setActivated(true);
         return account;
     }
 
@@ -54,16 +90,4 @@ public class JdbcAccountDAO implements AccountDAO{
 //
 //        return account;  // change accordingly
 //    }
-
-
-
-    private Account mapRowToAccount(SqlRowSet rs) {
-        Account account = new Account();
-        account.setId(rs.getLong("account_id"));
-        account.setId(rs.getLong("user_id"));
-        account.setBalance(rs.getBigDecimal("balance"));
-        account.setActivated(true);
-        return account;
-    }
-
 }
