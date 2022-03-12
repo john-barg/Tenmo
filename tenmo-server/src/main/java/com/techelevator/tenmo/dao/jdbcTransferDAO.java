@@ -6,30 +6,33 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import javax.security.auth.login.AccountNotFoundException;
 import javax.sql.DataSource;
-import java.math.BigDecimal;
 
-public class jdbcTransferDAO implements TransferDao {
+public class jdbcTransferDao implements TransferDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public jdbcTransferDAO(DataSource dataSource) {
+    public jdbcTransferDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
 
-    @Override
-    public Transfer returnTransfer(String username) throws AccountNotFoundException {
+    @Override //update SQL
+    public Transfer getTransferId(String username)  {
 
         Transfer transfer = null;
 
-        String sql = "SELECT balance FROM transfer WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        String sql = "SELECT transfer_id" +
+                "FROM transfer" +
+                "JOIN transfer_status ON transfer_status.transfer_status_id = transfer.transfer_status_id\n" +
+                "WHERE username='?';";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
 
-        if (result.next()) {
+        try {
+            result.next();
             transfer = mapRowToTransfer(result);
         }
-        if(transfer == null) {
-            throw new AccountNotFoundException();
+        catch(Exception ex) {
+//            throw new AccountNotFoundException();
         }
 
         return transfer;
@@ -45,20 +48,4 @@ public class jdbcTransferDAO implements TransferDao {
 
     }
 
-// @Override
-//    public  Account returnAccount(String username) throws AccountNotFoundException {
-//
-//        Account account = null;
-//
-//        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
-//        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
-//
-//        if (result.next()) {
-//            account = mapRowToAccount(result);
-//        }
-//        if(account == null) {
-//            throw new AccountNotFoundException();
-//        }
-//        return account;
-//    }
 }

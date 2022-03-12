@@ -11,7 +11,6 @@ public class Transfer {
     public Transfer(Long transferId, BigDecimal balanceOfTransfer){
         this.transferId = transferId;
         this.balanceOfTransfer = balanceOfTransfer;
-
     }
 
     public Long getTransferId() {
@@ -29,6 +28,9 @@ public class Transfer {
     public void setBalanceOfTransfer(BigDecimal balanceOfTransfer) {
         this.balanceOfTransfer = balanceOfTransfer;
     }
+
+
+
     @Override
     public String toString() {
         return "Transfer{" +

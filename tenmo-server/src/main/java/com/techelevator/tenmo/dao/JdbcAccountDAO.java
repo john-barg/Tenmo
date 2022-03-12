@@ -1,31 +1,29 @@
 package com.techelevator.tenmo.dao;
 
 import com.techelevator.tenmo.model.Account;
-import com.techelevator.tenmo.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.security.auth.login.AccountNotFoundException;
 import javax.sql.DataSource;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
-public class JdbcAccountDAO implements AccountDAO{
+public class JdbcAccountDao implements AccountDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcAccountDAO(DataSource dataSource) {
+    public JdbcAccountDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override  //Revise SQL statement?
     public  Account getAccountId(String username) throws AccountNotFoundException {
         Account account = null;
-        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        String sql = "SELECT  account_id" +
+                "FROM account" +
+                "JOIN tenmo_user ON tenmo_user.user_id = account.user_id" +
+                "WHERE username='?');";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()) {
             account = mapRowToAccount(result);
@@ -64,12 +62,10 @@ public class JdbcAccountDAO implements AccountDAO{
         return account;
     }
 
-
-
     private Account mapRowToAccount(SqlRowSet rs) {
         Account account = new Account();
-        account.setId(rs.getLong("account_id"));
-        account.setId(rs.getLong("user_id"));
+        account.setAccountId(rs.getLong("account_id"));
+        account.setUserId(rs.getInt("user_id"));
         account.setBalance(rs.getBigDecimal("balance"));
         account.setActivated(true);
         return account;

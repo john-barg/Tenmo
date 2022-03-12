@@ -9,7 +9,7 @@ public interface TransferDao {
 
     Transfer transfer = new Transfer();
 
-    public Transfer returnTransfer(String username) throws AccountNotFoundException;
+     Transfer getTransferId(String username);
 
     //get all transfers
     //create transfers
