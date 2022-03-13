@@ -9,10 +9,14 @@ public interface TransferDao {
 
 //    Transfer transfer = new Transfer();
 
-     Transfer getTransferId(String username);
+//     Transfer getTransferId(String username);
+//
+//     Transfer getTransferStatus(String username);
 
-    //get all transfers
-    //create transfers
-    //transfer status
+     Transfer fundsTransfer(Transfer transfer);
+
+     //get all transfers
+     //create transfers
+
 
 }

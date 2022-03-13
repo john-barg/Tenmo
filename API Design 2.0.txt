@@ -1,0 +1,22 @@
+
+Principal- current user
+
+RETURN ACCOUNT BALANCE
+url : /accounts
+Method : GET ----- principal
+DESCRPITION: this method returns account balance
+Status Code: 200-OK
+
+TRANSFER FUNDS
+url : /transfer
+method : POST
+desc. : Establishes transfer amount, apply the transfer to the relative amounts
+status code: 200 -ok, insufficient funds?
+
+VIEW TRANSFER
+url: /transfers/{id}
+method : GET
+desc : recalls transfer amounts, retrieve further details
+status code: OK 
+
+-----------

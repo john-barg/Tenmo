@@ -23,39 +23,58 @@ Method: GET
 Description: this method retrieves all users
 Http Status Codes:200 - OK
 
-Return account Balance
-url : /accounts/{id}
-Method : GET
+----------------
+
+Principal- current user
+
+RETURN ACCOUNT BALANCE
+url : /accounts
+Method : GET.principal
 DESCRPITION: this method returns account balance
 Status Code: 200-OK
 
-TRANSFER FUNDS - "don't have separate withdarawal and deposit methods"
-url : /accounts/{id1}
+TRANSFER FUNDS
+url : /transfer
 method : POST
-desc. : update new account balance (less transfer amount)
+desc. : Establishes transfer amount, apply the transfer to the relative amounts
 status code: 200 -ok, insufficient funds?
 
-url : /accounts/{id2}
-method : POST
-desc. : update new account balance (added transfer amount) 
-status code: 200-ok
-
 VIEW TRANSFER
-url: /transfers(/{id})
+url: /transfers/{id}
 method : GET
-desc : recalls transfer amounts
+desc : recalls transfer amounts, retrieve further details
 status code: OK 
 
-TRANSFER DETAILS
-url: /transfer/({id})
-method : GET 
-desc : returns transfer details
-status : OK
+-----------
+Use Case 3
+As an authenticated user of the system, I need to be able to see my account balance
+
+Authenticated user
+	token,
+	principal
+
+Retrieve account balance
+	create account object to utilize for access
+	
+
+---
+TERMS
+Spring
+-@Valid
+
+Java to SQL
+-mapRowToHome 
+-sqlRowSet
+-queryforset
+
+
+
+----------
 
 REQUESTING PAYMENT
-url: transfer/id
+url: transfer
 method : PUT
-desc : creates new transfer
+desc : 
 status : OK
 
 PENDING REQUESTS 

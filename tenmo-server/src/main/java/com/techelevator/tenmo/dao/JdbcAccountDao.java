@@ -54,10 +54,10 @@ public class JdbcAccountDao implements AccountDao {
     @Override
     public Account getBalance(String username) {
         Account account = null;
-        String sql = "SELECT balance" +
-                "FROM account" +
-                "JOIN tenmo_user ON tenmo_user.user_id=account.user_id" +
-                "WHERE username = ?";
+        String sql = "SELECT *" +
+                " FROM account" +
+                " JOIN tenmo_user ON tenmo_user.user_id=account.user_id" +
+                " WHERE username = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()) {
             account = mapRowToAccount(result);
@@ -71,10 +71,10 @@ public class JdbcAccountDao implements AccountDao {
     @Override               //update SQL and adjust outputs
     public Account withdrawal(BigDecimal withdrawal){
         Account account = null;
-        account.withdrawal(withdrawal);
+
         String sql = "UPDATE account " +
                 "SET balance = ?" +
-                "WHERE account_id = ?";    //update
+                "WHERE account_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, account.getBalance(), account.getAccountId());
         if (result.next()) {
             account = mapRowToAccount(result);
@@ -88,8 +88,10 @@ public class JdbcAccountDao implements AccountDao {
     @Override               //Update SQL and adjust outputs
     public Account deposit(BigDecimal deposit){
         Account account = null;
-        account.deposit(deposit);
-        String sql = "";
+
+        String sql = "UPDATE account " +
+                "SET balance = ?" +
+                "WHERE account_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, account.getBalance(), account.getAccountId());
         if (result.next()) {
             account = mapRowToAccount(result);
