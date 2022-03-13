@@ -18,7 +18,7 @@ public class JdbcAccountDao implements AccountDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @Override  //Revise SQL statement?
+    @Override
     public  Account getAccountId(String username) throws AccountNotFoundException {
         Account account = null;
         String sql = "SELECT  account_id" +
@@ -35,10 +35,12 @@ public class JdbcAccountDao implements AccountDao {
         return account;
     }
 
-    @Override  //Revise SQL statement?
+    @Override
     public Account getUserId(String username) {
         Account account = null;
-        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        String sql = "SELECT user_id" +
+        "FROM tenmo_user" +
+        "WHERE username = '?'";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()) {
             account = mapRowToAccount(result);
@@ -49,10 +51,13 @@ public class JdbcAccountDao implements AccountDao {
         return account;
     }
 
-    @Override  //Revise SQL statement?
+    @Override
     public Account getBalance(String username) {
         Account account = null;
-        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        String sql = "SELECT balance" +
+                "FROM account" +
+                "JOIN tenmo_user ON tenmo_user.user_id=account.user_id" +
+                "WHERE username = '?'";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()) {
             account = mapRowToAccount(result);
@@ -66,7 +71,7 @@ public class JdbcAccountDao implements AccountDao {
     @Override               //update SQL and adjust outputs
     public Account withdrawal(BigDecimal withdrawal){
         Account account = null;
-        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        String sql = "";    //update
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, );
         if (result.next()) {
             account = mapRowToAccount(result);
@@ -80,7 +85,7 @@ public class JdbcAccountDao implements AccountDao {
     @Override               //Update SQL and adjust outputs
     public Account deposit(BigDecimal deposit){
         Account account = null;
-        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        String sql = "";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql,);
         if (result.next()) {
             account = mapRowToAccount(result);

@@ -20,6 +20,6 @@ public interface AccountDao {
 
     Account deposit(BigDecimal deposit);
 
-//keep making more methods relative to the account class
+//needs more logic methods, determining the availability of funds
 
 }
