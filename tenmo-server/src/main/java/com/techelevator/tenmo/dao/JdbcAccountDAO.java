@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.security.auth.login.AccountNotFoundException;
 import javax.sql.DataSource;
+import java.math.BigDecimal;
 
 @Component
 public class JdbcAccountDao implements AccountDao {
@@ -62,6 +63,34 @@ public class JdbcAccountDao implements AccountDao {
         return account;
     }
 
+    @Override               //update SQL and adjust outputs
+    public Account withdrawal(BigDecimal withdrawal){
+        Account account = null;
+        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, );
+        if (result.next()) {
+            account = mapRowToAccount(result);
+        }
+        if (account == null) {
+//            throw new AccountNotFoundException();
+        }
+        return account;
+    }
+
+    @Override               //Update SQL and adjust outputs
+    public Account deposit(BigDecimal deposit){
+        Account account = null;
+        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql,);
+        if (result.next()) {
+            account = mapRowToAccount(result);
+        }
+        if (account == null) {
+//            throw new AccountNotFoundException();
+        }
+        return account;
+    }
+
     private Account mapRowToAccount(SqlRowSet rs) {
         Account account = new Account();
         account.setAccountId(rs.getLong("account_id"));
@@ -73,17 +102,5 @@ public class JdbcAccountDao implements AccountDao {
 
 //----------------------
 
-//    @Override                           //super uncertain about recalling by username ///principal.getId
-//    public  returnBalance(String username) {
-//        //int id = jdbcuserdao.findidbyusername(principal)
-//
-//        String sql = "SELECT balance FROM account WHERE user_id IN (SELECT user_id FROM tenmo_user WHERE username = ?);";
-//        BigDecimal balance = jdbcTemplate.queryForObject(sql, BigDecimal.class, username );
-////        if (rowSet.next()){
-////            return mapRowToAccount(rowSet);
-////        }
-////        throw new AccountNotFoundException("Account " +  + " was not found.");
-//
-//        return account;  // change accordingly
-//    }
+
 }

@@ -14,7 +14,7 @@ import javax.security.auth.login.AccountNotFoundException;
 import java.security.Principal;
 import java.util.List;
 
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 @RestController
 public class TenmoController {
 
@@ -22,9 +22,12 @@ public class TenmoController {
     private UserDao userDao;
     @Autowired
     private AccountDao accountDAO;
-//    @Autowired
-//    private TransferDao transferDao;
- change
+    @Autowired
+    private TransferDao transferDAO;
+//    public TenmoController(TransferDao transferDAO) {     //dependency injection using constructor - option 1
+//        this.transferDAO = transferDAO;
+//    }
+
     String account;
 
     @RequestMapping(path = "/users")
@@ -42,10 +45,10 @@ public class TenmoController {
 //        return accountDAO.getUserId(principal.getName());
 //    }
 
-//    @RequestMapping(path = "/transfers", method = RequestMethod.GET)
-//    public Transfer getTransferId(Principal principal) throws AccountNotFoundException {
-//        return transferDao.getTransferId(principal.getName());
-//    }
+    @RequestMapping(path = "/transfers", method = RequestMethod.GET)
+    public Transfer getTransferId(Principal principal) throws AccountNotFoundException {
+        return transferDAO.getTransferId(principal.getName());
+    }
 
 
 }

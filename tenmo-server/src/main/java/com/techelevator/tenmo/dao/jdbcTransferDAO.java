@@ -3,10 +3,12 @@ package com.techelevator.tenmo.dao;
 import com.techelevator.tenmo.model.Transfer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import javax.security.auth.login.AccountNotFoundException;
 import javax.sql.DataSource;
 
+@Component
 public class jdbcTransferDao implements TransferDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -23,7 +25,7 @@ public class jdbcTransferDao implements TransferDao {
 
         String sql = "SELECT transfer_id" +
                 "FROM transfer" +
-                "JOIN transfer_status ON transfer_status.transfer_status_id = transfer.transfer_status_id\n" +
+                "JOIN transfer_status ON transfer_status.transfer_status_id = transfer.transfer_status_id" +
                 "WHERE username='?';";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
 

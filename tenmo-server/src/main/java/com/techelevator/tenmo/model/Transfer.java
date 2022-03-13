@@ -6,6 +6,7 @@ public class Transfer {
     private Long transferId;
     private BigDecimal balanceOfTransfer;
 
+
     public Transfer () { }
 
     public Transfer(Long transferId, BigDecimal balanceOfTransfer){
