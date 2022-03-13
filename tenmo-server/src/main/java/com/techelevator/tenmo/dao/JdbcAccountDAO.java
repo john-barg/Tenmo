@@ -40,7 +40,7 @@ public class JdbcAccountDao implements AccountDao {
         Account account = null;
         String sql = "SELECT user_id" +
         "FROM tenmo_user" +
-        "WHERE username = '?'";
+        "WHERE username = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()) {
             account = mapRowToAccount(result);
@@ -57,7 +57,7 @@ public class JdbcAccountDao implements AccountDao {
         String sql = "SELECT balance" +
                 "FROM account" +
                 "JOIN tenmo_user ON tenmo_user.user_id=account.user_id" +
-                "WHERE username = '?'";
+                "WHERE username = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()) {
             account = mapRowToAccount(result);
@@ -71,8 +71,11 @@ public class JdbcAccountDao implements AccountDao {
     @Override               //update SQL and adjust outputs
     public Account withdrawal(BigDecimal withdrawal){
         Account account = null;
-        String sql = "";    //update
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, );
+        account.withdrawal(withdrawal);
+        String sql = "UPDATE account " +
+                "SET balance = ?" +
+                "WHERE account_id = ?";    //update
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, account.getBalance(), account.getAccountId());
         if (result.next()) {
             account = mapRowToAccount(result);
         }
@@ -85,8 +88,9 @@ public class JdbcAccountDao implements AccountDao {
     @Override               //Update SQL and adjust outputs
     public Account deposit(BigDecimal deposit){
         Account account = null;
+        account.deposit(deposit);
         String sql = "";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql,);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, account.getBalance(), account.getAccountId());
         if (result.next()) {
             account = mapRowToAccount(result);
         }

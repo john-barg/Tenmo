@@ -11,10 +11,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.AccountNotFoundException;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
-//@PreAuthorize("isAuthenticated()")
+@PreAuthorize("isAuthenticated()")
 @RestController
 public class TenmoController {
 
@@ -24,9 +25,7 @@ public class TenmoController {
     private AccountDao accountDAO;
     @Autowired
     private TransferDao transferDAO;
-//    public TenmoController(TransferDao transferDAO) {     //dependency injection using constructor - option 1
-//        this.transferDAO = transferDAO;
-//    }
+
 
     String account;
 
@@ -36,19 +35,24 @@ public class TenmoController {
     }
 
     @RequestMapping(path = "/accounts", method = RequestMethod.GET)
-    public Account getAccountId( Principal principal) throws AccountNotFoundException {;
+    public Account getAccountId(@Valid Principal principal) throws AccountNotFoundException {
         return accountDAO.getAccountId(principal.getName());
     }
 
-//    @RequestMapping(path = "/accounts", method = RequestMethod.GET)
-//    public Account getUserId( Principal principal) {
-//        return accountDAO.getUserId(principal.getName());
-//    }
+    @RequestMapping(path = "/accounts")
+    public Account getBalance(@Valid Principal principal){
+        return accountDAO.getBalance(principal.getName());
+    }
 
     @RequestMapping(path = "/transfers", method = RequestMethod.GET)
     public Transfer getTransferId(Principal principal) throws AccountNotFoundException {
         return transferDAO.getTransferId(principal.getName());
     }
+
+    //Add a new transfer
+
+    // Transfer Approval?
+
 
 
 }
