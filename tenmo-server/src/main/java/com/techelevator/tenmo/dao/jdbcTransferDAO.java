@@ -17,37 +17,33 @@ public class jdbcTransferDao implements TransferDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    //Get Transfer History
+    //Send payment
+    //Request payment
 
-    @Override //update SQL
-    public Transfer getTransferId(String username)  {
+    //Create Transfer
+    public Transfer fundsTransfer(Transfer transfer){
+        //SQL ---Look up accountId for sender and
+        //SQL --- receiver
 
-        Transfer transfer = null;
+        //SQL --- use that and insert into transfer table
 
-        String sql = "SELECT transfer_id" +
-                "FROM transfer" +
-                "JOIN transfer_status ON transfer_status.transfer_status_id = transfer.transfer_status_id" +
-                "WHERE username='?';";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
-
-        try {
-            result.next();
-            transfer = mapRowToTransfer(result);
-        }
-        catch(Exception ex) {
-//            throw new AccountNotFoundException();
-        }
-
+        //SQL --- update balance for sender
+        //SQL --- update balance for receiver
         return transfer;
-
     }
-    private Transfer mapRowToTransfer(SqlRowSet rs){
+
+
+
+
+
+    private Transfer mapRowToTransfer(SqlRowSet rs) {
         Transfer transfer = new Transfer();
         transfer.setTransferId(rs.getLong("transferId"));
         transfer.setBalanceOfTransfer(rs.getBigDecimal("balanceOfTransfer"));
 
         return transfer;
-
-
     }
+
 
 }

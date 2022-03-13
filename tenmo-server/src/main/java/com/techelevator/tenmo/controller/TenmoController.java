@@ -26,17 +26,9 @@ public class TenmoController {
     @Autowired
     private TransferDao transferDAO;
 
-
-    String account;
-
     @RequestMapping(path = "/users")
     public List<User> listAllUsers(){
         return userDao.findAll();
-    }
-
-    @RequestMapping(path = "/accounts", method = RequestMethod.GET)
-    public Account getAccountId(@Valid Principal principal) throws AccountNotFoundException {
-        return accountDAO.getAccountId(principal.getName());
     }
 
     @RequestMapping(path = "/accounts")
@@ -44,15 +36,21 @@ public class TenmoController {
         return accountDAO.getBalance(principal.getName());
     }
 
-    @RequestMapping(path = "/transfers", method = RequestMethod.GET)
-    public Transfer getTransferId(Principal principal) throws AccountNotFoundException {
-        return transferDAO.getTransferId(principal.getName());
+    @RequestMapping(path = "/transfers", method = RequestMethod.POST)
+    public Transfer fundsTransfer(Transfer transfer, Principal principal){
+        return transferDAO.fundsTransfer(transfer);
     }
 
-    //Add a new transfer
+//    @RequestMapping(path = "/transfers")                  -WRITE LISTOFTRANSFERS DAO
+//    public Transfer[] getListOfTransfers(Principal principal){
+//        return transferDAO.getListOfTransfers(principal.getName());
+//    }
 
-    // Transfer Approval?
+//    @RequestMapping(path = "/transfers/{id}")             - WRITE GETTRANSFERBYID DAO
+//    public Transfer getTransferById(@PathVariable Long id, (Principal principal){
+//        return transferDAO.getTransferById(id);
+//    }
 
-
-
+    //-exception handling
+    //return codes
 }
