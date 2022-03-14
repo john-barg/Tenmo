@@ -46,7 +46,7 @@ public class jdbcTransferDao implements TransferDao {
 
     public List<Transfer> getListOfTransfers(String username){
         List<Transfer> transferList =new ArrayList<>();
-        String sql = "SELECT *FROM <transfer_id>\n";                    //Pretty Sure this  is javaSQL spanglish
+        String sql = "SELECT * FROM transfer WHERE transfer_id=3003";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         while (result.next()) {
             Transfer transfer = mapRowToTransfer(result);
