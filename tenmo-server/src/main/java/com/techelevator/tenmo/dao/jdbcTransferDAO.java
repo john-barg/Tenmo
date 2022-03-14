@@ -58,6 +58,30 @@ public class jdbcTransferDao implements TransferDao {
         return transferList;
     }
 
+    public Transfer getTransferDetails(String username){
+        Transfer transferDetails=null;
+        String sql = "SELECT transfer_id, transfer_type_id, transfer_status_id, account_from, account_to, amount\n" +
+                "FROM transfer\n";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+        if (result.next()) {
+            transferDetails = mapRowToTransfer(result);
+//            transferDetails.add(transfer);
+        }
+        return transferDetails;
+    }
+
+//    public Transfer getTransferDetails(String username){          //UPDATE TO getTransferById
+//        Transfer transferDetails=null;
+//        String sql = "SELECT transfer_id, transfer_type_id, transfer_status_id, account_from, account_to, amount\n" +
+//                "FROM transfer\n";
+//        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+//        if (result.next()) {
+//            transferDetails = mapRowToTransfer(result);
+////            transferDetails.add(transfer);
+//        }
+//        return transferDetails;
+//    }
+
 
 
     private Transfer mapRowToTransfer(SqlRowSet rs) {

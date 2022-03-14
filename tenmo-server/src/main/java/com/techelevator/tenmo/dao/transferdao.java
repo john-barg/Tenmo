@@ -19,6 +19,8 @@ public interface TransferDao {
 
      List<Transfer> getListOfTransfers(String username);
 
+     Transfer getTransferDetails(String username);
+
      //get all transfers
      //create transfers
 

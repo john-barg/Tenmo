@@ -69,13 +69,16 @@ public class JdbcAccountDao implements AccountDao {
     }
 
     @Override               //update SQL and adjust outputs
-    public Account withdrawal(BigDecimal withdrawal){
-        Account account = null;
+    public Account withdrawal(BigDecimal withdrawalAmount, Account account){
+        BigDecimal balance= account.getBalance();
+        balance=balance.subtract(withdrawalAmount);
 
         String sql = "UPDATE account " +
                 "SET balance = ?" +
                 "WHERE account_id = ?";
+
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, account.getBalance(), account.getAccountId());
+
         if (result.next()) {
             account = mapRowToAccount(result);
         }
@@ -86,8 +89,9 @@ public class JdbcAccountDao implements AccountDao {
     }
 
     @Override               //Update SQL and adjust outputs
-    public Account deposit(BigDecimal deposit){
-        Account account = null;
+    public Account deposit(BigDecimal depositAmount, Account account){
+        BigDecimal balance = account.getBalance();
+        balance = balance.add(depositAmount);
 
         String sql = "UPDATE account " +
                 "SET balance = ?" +
@@ -112,6 +116,5 @@ public class JdbcAccountDao implements AccountDao {
     }
 
 //----------------------
-
 
 }

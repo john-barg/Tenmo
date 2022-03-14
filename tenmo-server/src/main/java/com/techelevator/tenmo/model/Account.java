@@ -62,15 +62,6 @@ public class Account {
                 '}';
     }
 
-//    needs more logic methods, determining the availability of funds
-//    public BigDecimal withdrawal(BigDecimal withdrawalAmount){
-//        balance=balance.subtract(withdrawalAmount);
-//        return balance;
-//    }
-//
-//    public BigDecimal deposit(BigDecimal depositAmount){
-//        balance=balance.add(depositAmount);
-//        return balance;
-//    }
+
 
 }
