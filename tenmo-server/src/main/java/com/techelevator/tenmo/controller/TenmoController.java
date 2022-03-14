@@ -38,19 +38,21 @@ public class TenmoController {
 
     @RequestMapping(path = "/transfers", method = RequestMethod.POST)
     public Transfer fundsTransfer(Transfer transfer, Principal principal){
-        return transferDAO.fundsTransfer(transfer);
+        return transferDAO.fundsTransfer(transfer, principal);
     }
 
-//    @RequestMapping(path = "/transfers")                  -WRITE LISTOFTRANSFERS DAO
-//    public Transfer[] getListOfTransfers(Principal principal){
-//        return transferDAO.getListOfTransfers(principal.getName());
-//    }
+    @RequestMapping(path = "/transfers")                  //-WRITE GETLISTOFTRANSFERS DAO
+    public List <Transfer> getListOfTransfers(Principal principal){
+        return transferDAO.getListOfTransfers(principal.getName());
+    }
 
-//    @RequestMapping(path = "/transfers/{id}")             - WRITE GETTRANSFERBYID DAO
+//    @RequestMapping(path = "/transfers/{id}")            //-WRITE GETTRANSFERBYID DAO
 //    public Transfer getTransferById(@PathVariable Long id, (Principal principal){
 //        return transferDAO.getTransferById(id);
 //    }
 
+
+//*******WISHLIST******
     //-exception handling
     //return codes
 }
