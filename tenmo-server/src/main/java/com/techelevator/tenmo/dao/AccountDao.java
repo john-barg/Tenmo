@@ -16,9 +16,10 @@ public interface AccountDao {
 
     Account getBalance(String username);
 
-    Account withdrawal(BigDecimal withdrawal);
+    Account withdrawal(BigDecimal withdrawalAmount, Account account);
 
-    Account deposit(BigDecimal deposit);
+    Account deposit(BigDecimal depositAmount, Account account);
+
 
 //needs more logic methods, determining the availability of funds
 
