@@ -42,11 +42,11 @@ public class TenmoController {
     }
 
 
-    @RequestMapping(path = "/transfer")                  //-WRITE GETLISTOFTRANSFERS DAO
-    public List <Transfer> getListOfTransfers(Principal principal){
-        long senderId = userDao.findIdByUsername(principal.getName());
-        return transferDAO.getListOfTransfers(senderId);
-    }
+//    @RequestMapping(path = "/transfer")                  //-WRITE GETLISTOFTRANSFERS DAO //Commented out prior to fork
+//    public List <Transfer> getListOfTransfers(Principal principal){
+//        long senderId = userDao.findIdByUsername(principal.getName());
+//        return transferDAO.getListOfTransfers(senderId);
+//    }
 
 //    @RequestMapping(path = "/transfers/{id}")            //-WRITE GETTRANSFERBYID DAO
 //    public Transfer getTransferById(@PathVariable Long id, (Principal principal){

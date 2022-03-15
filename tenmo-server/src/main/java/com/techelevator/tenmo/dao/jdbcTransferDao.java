@@ -25,24 +25,24 @@ public class jdbcTransferDao implements TransferDao {
     //Request payment
 
     //Create Transfer
-    public Transfer fundsTransfer(Transfer transfer, long senderId{
-        //SQL ---Look up accountId for sender and
-        String sqlSender = "SELECT account_id FROM account\n" +
-                "JOIN transfer ON transfer.account_from = account.account_id\n" +
-                "WHERE transfer_id = '?'\n";
-        //SQL --- receiver
-        String sqlReceiver = "SELECT account_id FROM account\n" +
-                "JOIN transfer ON transfer.account_to = account.account_id\n" +
-                "WHERE transfer_id = '?'\n";
-
-        //SQL --- use that and insert into transfer table
-        String sql = "INSERT INTO transfer ( transfer_id, transfer_type_id, transfer_status_id, account_from, account_to, amount decimal)\n" +
-                "VALUES( '?','?','?','?','?','?' )\n";
-
-        //SQL --- update balance for sender
-        //SQL --- update balance for receiver
-        return transfer;
-    }
+//    public Transfer fundsTransfer(Transfer transfer, long senderId{
+//        //SQL ---Look up accountId for sender and
+//        String sqlSender = "SELECT account_id FROM account\n" +
+//                "JOIN transfer ON transfer.account_from = account.account_id\n" +
+//                "WHERE transfer_id = '?'\n";
+//        //SQL --- receiver
+//        String sqlReceiver = "SELECT account_id FROM account\n" +
+//                "JOIN transfer ON transfer.account_to = account.account_id\n" +
+//                "WHERE transfer_id = '?'\n";
+//
+//        //SQL --- use that and insert into transfer table
+//        String sql = "INSERT INTO transfer ( transfer_id, transfer_type_id, transfer_status_id, account_from, account_to, amount decimal)\n" +
+//                "VALUES( '?','?','?','?','?','?' )\n";
+//
+//        //SQL --- update balance for sender
+//        //SQL --- update balance for receiver
+//        return transfer;
+//    }
 
     public List<Transfer> getListOfTransfers(long senderId){
 
@@ -71,6 +71,16 @@ public class jdbcTransferDao implements TransferDao {
         return transferList;
     }
 
+    @Override
+    public Transfer fundsTransfer(Transfer transfer, Principal principal) {
+        return null;
+    }
+
+    @Override
+    public List<Transfer> getListOfTransfers(String username) {
+        return null;
+    }
+
     public Transfer getTransferDetails(String username){
         Transfer transferDetails=null;
         String sql = "SELECT transfer_id, transfer_type_id, transfer_status_id, account_from, account_to, amount\n" +
@@ -84,16 +94,16 @@ public class jdbcTransferDao implements TransferDao {
     }
 
     public Transfer getTransferById(long transferId){          //UPDATE TO getTransferById
-       Transfer transfer=null;
-       String sql = "SELECT * " +
+        Transfer transfer=null;
+        String sql = "SELECT * " +
                 "FROM transfer\n" +
-               "WHERE transfer_id= '?' ";
+                "WHERE transfer_id= '?' ";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, transferId);
-       if (result.next()) {
+        if (result.next()) {
             transfer = mapRowToTransfer(result);
-      }     return transfer;
-  }
+        }     return transfer;
+    }
 
 
 
