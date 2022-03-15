@@ -83,27 +83,32 @@ public class jdbcTransferDao implements TransferDao {
         return transferDetails;
     }
 
-//    public Transfer getTransferDetails(String username){          //UPDATE TO getTransferById
-//        Transfer transferDetails=null;
-//        String sql = "SELECT transfer_id, transfer_type_id, transfer_status_id, account_from, account_to, amount\n" +
-//                "FROM transfer\n";
-//        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
-//        if (result.next()) {
-//            transferDetails = mapRowToTransfer(result);
-////            transferDetails.add(transfer);
-//        }
-//        return transferDetails;
-//    }
+    public Transfer getTransferById(long transferId){          //UPDATE TO getTransferById
+       Transfer transfer=null;
+       String sql = "SELECT * " +
+                "FROM transfer\n" +
+               "WHERE transfer_id= '?' ";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, transferId);
+       if (result.next()) {
+            transfer = mapRowToTransfer(result);
+      }     return transfer;
+  }
 
 
 
     private Transfer mapRowToTransfer(SqlRowSet rs) {
         Transfer transfer = new Transfer();
         transfer.setTransferId(rs.getLong("transferId"));
-        transfer.setBalanceOfTransfer(rs.getBigDecimal("balanceOfTransfer"));
-
+        transfer.setTransferAmount(rs.getBigDecimal("transferAmount")); //change totransferamount
+        transfer.setTransferAccountFrom(rs.getLong("transferAccountFrom"));
+        transfer.setTransferStatus(rs.getString("transferStatus"));
+        transfer.setTransferType(rs.getString("transferType"));
+        transfer.setTransferAccountTo(rs.getLong("transferAccountTo"));
         return transfer;
     }
+
+
 
 
 }

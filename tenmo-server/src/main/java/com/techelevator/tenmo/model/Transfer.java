@@ -4,11 +4,36 @@ import java.math.BigDecimal;
 
 public class Transfer {
     private Long transferId;
-    private BigDecimal balanceOfTransfer;
+
+    public BigDecimal getTransferAmount() {
+        return transferAmount;
+    }
+
+    public void setTransferAmount(BigDecimal transferAmount) {
+        this.transferAmount = transferAmount;
+    }
+
+    private BigDecimal transferAmount;  //
     private String transferStatus;
     private String transferType;
-    private Long transferToId;
-    private Long transferFromId;
+
+    public Long getTransferAccountFrom() {
+        return transferAccountTo;
+    }
+
+    public void setTransferAccountTo(Long transferAccountTo) {
+        this.transferAccountTo = transferAccountTo;
+    }
+
+    private Long transferAccountTo;
+
+    
+
+    public void setTransferAccountFrom(Long transferAccountFrom) {
+        this.transferAccountFrom = transferAccountFrom;
+    }
+
+    private Long  transferAccountFrom;
     private String transferToUsername;
     private String transferFromUsername;
 
@@ -18,7 +43,7 @@ public class Transfer {
 
     public Transfer(Long transferId, BigDecimal balanceOfTransfer){
         this.transferId = transferId;
-        this.balanceOfTransfer = balanceOfTransfer;
+
     }
 
     public String getTransferToUsername() {
@@ -37,21 +62,8 @@ public class Transfer {
         this.transferFromUsername = transferFromUsername;
     }
 
-    public Long getTransferFromId() {
-        return transferFromId;
-    }
 
-    public void setTransferFromId(Long transferFromId) {
-        this.transferFromId = transferFromId;
-    }
 
-    public Long getTransferToId() {
-        return transferToId;
-    }
-
-    public void setTransferToId(Long transferToId) {
-        this.transferToId = transferToId;
-    }
 
     public Long getTransferId() {
         return transferId;
@@ -61,13 +73,7 @@ public class Transfer {
         this.transferId = transferId;
     }
 
-    public BigDecimal getBalanceOfTransfer() {
-        return balanceOfTransfer;
-    }
 
-    public void setBalanceOfTransfer(BigDecimal balanceOfTransfer) {
-        this.balanceOfTransfer = balanceOfTransfer;
-    }
 
     public String getTransferStatus() {
         return transferStatus;
@@ -89,7 +95,7 @@ public class Transfer {
     public String toString() {
         return "Transfer{" +
                 "transfer id=" + transferId +
-                ", balanceOfTransfer='" + balanceOfTransfer + '\'' +
+                ", transferAmount='" + transferAmount + '\'' +
                 '}';
     }
 }
