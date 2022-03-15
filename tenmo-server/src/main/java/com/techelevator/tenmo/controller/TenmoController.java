@@ -36,14 +36,16 @@ public class TenmoController {
         return accountDAO.getBalance(principal.getName());
     }
 
-    @RequestMapping(path = "/transfer", method = RequestMethod.POST)
+    @RequestMapping(path = "/transfer", method = RequestMethod.POST)                //tODO - write the SQL
     public Transfer fundsTransfer(Transfer transfer, Principal principal){
         return transferDAO.fundsTransfer(transfer, principal);
     }
 
+
     @RequestMapping(path = "/transfer")                  //-WRITE GETLISTOFTRANSFERS DAO
     public List <Transfer> getListOfTransfers(Principal principal){
-        return transferDAO.getListOfTransfers(principal.getName());
+        long senderId = userDao.findIdByUsername(principal.getName());
+        return transferDAO.getListOfTransfers(senderId);
     }
 
 //    @RequestMapping(path = "/transfers/{id}")            //-WRITE GETTRANSFERBYID DAO

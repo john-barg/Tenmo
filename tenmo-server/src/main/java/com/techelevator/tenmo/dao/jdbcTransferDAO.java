@@ -25,7 +25,7 @@ public class jdbcTransferDao implements TransferDao {
     //Request payment
 
     //Create Transfer
-    public Transfer fundsTransfer(Transfer transfer, Principal principal){
+    public Transfer fundsTransfer(Transfer transfer, long senderId{
         //SQL ---Look up accountId for sender and
         String sqlSender = "SELECT account_id FROM account\n" +
                 "JOIN transfer ON transfer.account_from = account.account_id\n" +
@@ -44,12 +44,25 @@ public class jdbcTransferDao implements TransferDao {
         return transfer;
     }
 
-    public List<Transfer> getListOfTransfers(String username){
+    public List<Transfer> getListOfTransfers(long senderId){
+
         List<Transfer> transferList =new ArrayList<>();
-        String sql = "SELECT * FROM transfer WHERE transfer_id=3003";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
-        while (result.next()) {
-            Transfer transfer = mapRowToTransfer(result);
+
+        long accountId=-1;
+
+        String sql = "SELECT account_id" +
+                "FROM account" +
+                "WHERE user_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, senderId);
+        if (result.next()) {
+            accountId= result.getInt("account_id");
+        }
+        String sql2 = "SELECT * \n" +
+                "FROM transfer \n" +
+                "WHERE account_from= ? or account_to=?";
+        SqlRowSet result2 = jdbcTemplate.queryForRowSet(sql2, accountId, accountId);
+        while (result2.next()) {
+            Transfer transfer = mapRowToTransfer(result2);
             transferList.add(transfer);
         }
 //        if (transfer == null) {
